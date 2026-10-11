@@ -1,0 +1,9 @@
+dist/
+*.user
+.vs/
+bin/
+obj/
+*.pfx
+*.p12
+*.key
+*.log

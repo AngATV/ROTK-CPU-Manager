@@ -1,0 +1,95 @@
+ROTK CPU Manager — version portable 1.4
+Assistant CPU réservé au client ROTK / Z1BR.
+
+L'interface reprend une ambiance H1Z1 / ROTK : anthracite, rouge et panneaux
+industriels. La colonne de droite explique le profil sélectionné ; le bouton
+« Comprendre les réglages » détaille P-cores, cache AMD, SMT et comparaison en jeu.
+Les barres de défilement sont intégrées au thème : molette, glissement et clavier.
+Les boutons FR / EN et les contrôles réduire / agrandir / fermer sont dans le bandeau.
+Vous pouvez déplacer la fenêtre par ce bandeau et redimensionner par les bords.
+
+LANGUES
+ROTK-CPU-Manager-FR.exe démarre en français ; ROTK-CPU-Manager-EN.exe démarre en anglais.
+Les deux permettent de changer de langue avec FR / EN sans arrêter la surveillance.
+ROTK-CPU-Manager.exe est la version bilingue générale, qui mémorise la langue choisie.
+Les versions partagent les préférences et ne s'ouvrent pas en même temps.
+
+UTILISATION
+1. Lancez ROTK-CPU-Manager.exe sur Windows 10 ou 11, 64 bits.
+2. Le dossier proposé est C:\Games\ROTK. Utilisez « Choisir… » si nécessaire.
+   Il doit contenir H1Z1.exe et rotkc.dll (client ROTK).
+3. Lisez le profil conseillé pour votre processeur.
+4. Cliquez « Appliquer et surveiller ». Vous pouvez lancer ROTK avant ou après.
+   Le profil est appliqué automatiquement à chaque H1Z1.exe de ce dossier.
+5. « Restaurer et arrêter » restitue le réglage initial et coupe l'application automatique.
+   Fermer l'outil restaure aussi le réglage initial du jeu encore ouvert.
+
+Minimiser cache la fenêtre dans la zone de notification et garde la surveillance.
+Double-cliquez l'icône pour rouvrir. « Quitter et restaurer » ferme vraiment l'outil.
+La préférence d'application automatique est conservée pour la prochaine ouverture
+de ROTK CPU Manager ; l'outil doit être ouvert pour surveiller les lancements du jeu.
+Il ne démarre pas tout seul avec Windows et ne lance pas le jeu.
+
+CPU PERTINENTS (EXEMPLES)
+- Intel hybrides : i5-12600K/KF, i7-12700K/KF, i9-12900K/KF ;
+  i5-13600K/KF, i7-13700K/KF, i9-13900K/KF ; i5-14600K/KF,
+  i7-14700K/KF, i9-14900K/KF ; Core Ultra 200S / 200S Plus.
+  P-cores conseillés quand Windows les identifie, avec au moins quatre cœurs.
+- AMD X3D à caches asymétriques : Ryzen 9 7900X3D, 7950X3D, 9900X3D,
+  9950X3D. Grand cache conseillé si les tailles détectées le confirment.
+- AMD à plusieurs groupes L3 comparables : Ryzen 9 5900X, 5950X, 7900X,
+  7950X, 9900X, 9950X, 9950X3D2 Dual Edition. Windows conseillé ; essais de groupes.
+- AMD X3D à groupe unique : 5800X3D, 7800X3D, 9800X3D, 9850X3D.
+  Windows conseillé ; essai sans SMT, sans sélection de CCD.
+- Ryzen 5 3600 / 3600X : Windows conseillé ; essai à 6 threads au lieu de 12.
+  Les groupes L3 de moins de quatre cœurs physiques ne sont pas proposés.
+- Intel sans P/E-cores : Windows conseillé ; essai sans HT si au moins quatre
+  cœurs physiques et plusieurs threads par cœur. Sans HT : Windows uniquement.
+Liste non exhaustive, pas une liste de gains validés. Seul le i9-13900KF a été
+vérifié sur matériel réel ; les autres topologies sont vérifiées par simulation.
+
+PROFILS
+- Intel hybride : P-cores conseillés si au moins quatre cœurs performance sont identifiés.
+- AMD avec groupes de cache L3 asymétriques : groupe au plus grand cache proposé
+  en premier quand sa taille est nettement supérieure (cas X3D détectable).
+- AMD avec plusieurs groupes L3 de même taille : profils de groupes à essayer,
+  gestion Windows conseillée par défaut.
+- CPU classique ou topologie insuffisante : gestion Windows conseillée.
+- Sans SMT/Hyper-Threading : essais, un thread par cœur physique, pas une règle
+  « CPU pairs ». Ce choix ne désactive pas le SMT pour le reste du PC.
+- Plusieurs groupes de processeurs : seule la gestion Windows est proposée.
+
+Le profil conseillé est une hypothèse selon le matériel, pas un benchmark ROTK.
+Comparez les FPS, les ralentissements et la fluidité dans une scène comparable.
+Le cache partagé n'est pas toujours un CCD : l'outil parle de groupes L3.
+« Gestion Windows » efface les CPU Sets par défaut du jeu ; « Restaurer » remet
+les CPU Sets présents avant la première application, même s'ils venaient d'un autre outil.
+
+PÉRIMÈTRE
+Seul le fichier H1Z1.exe situé directement dans le dossier ROTK sélectionné est ciblé.
+Le H1Z1 d'une autre installation, LaunchPad, BattlEye, le navigateur et les autres
+programmes ne sont pas modifiés. Aucun fichier du jeu, service, pilote, priorité,
+affinité stricte, parking des cœurs ou réglage global Windows n'est changé.
+L'outil utilise les API CPU Sets de Windows. Une affinité déjà imposée ou des CPU
+Sets propres à certains threads peuvent limiter l'effet du profil.
+
+EN CAS DE PROBLÈME
+Accès refusé : si ROTK est lancé comme administrateur, fermez l'outil, puis faites
+clic droit sur ROTK-CPU-Manager.exe > Exécuter en tant qu'administrateur. Un processus protégé
+peut refuser l'accès malgré tout. L'outil ne contourne aucune protection.
+Le programme n'est pas signé : Windows peut afficher SmartScreen. Vérifiez la
+provenance du fichier et son empreinte SHA-256 avant de le lancer.
+Si l'outil est tué de force ou plante, la restauration ne peut pas s'exécuter :
+fermez et relancez le jeu pour retrouver sa répartition initiale.
+En cas d'échec de restauration, la fermeture est annulée pour permettre de réessayer.
+
+PARTAGE
+Envoyez ROTK-CPU-Manager-portable.zip, ou simplement ROTK-CPU-Manager.exe.
+Aucun SDK, téléchargement de runtime .NET moderne ou installation n'est nécessaire.
+L'application utilise .NET Framework 4.8, fourni sur Windows 10 récent et Windows 11.
+Pour un ancien Windows 10 sans 4.8, mettez Windows à jour ou installez le runtime 4.8.
+Les préférences sont locales : %LOCALAPPDATA%\ROTK CPU\settings.xml.
+Aucune télémétrie, aucun accès réseau dans l'application.
+Pour supprimer : fermez l'outil, supprimez l'exécutable et, si souhaité, ce dossier de préférences.
+
+Projet indépendant. Voir LICENSE et NOTICE.txt.

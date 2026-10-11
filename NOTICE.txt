@@ -1,0 +1,5 @@
+ROTK CPU Manager
+Copyright (c) 2026 AngATV. Licensed under the MIT License. See LICENSE.
+
+ROTK, Z1BR, H1Z1, Daybreak, Intel and AMD names belong to their respective owners.
+This project is not affiliated with or endorsed by those projects or companies.
