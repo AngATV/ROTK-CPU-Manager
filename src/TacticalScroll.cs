@@ -40,7 +40,7 @@ namespace RotkCpu
             TabStop = true;
             Cursor = Cursors.Hand;
             AccessibleRole = AccessibleRole.ScrollBar;
-            AccessibleName = "Scroll";
+            AccessibleName = Locale.T("Défilement");
         }
         internal void SetRange(int contentHeight, int viewportHeight)
         {

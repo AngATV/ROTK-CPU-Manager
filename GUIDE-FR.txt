@@ -1,0 +1,103 @@
+ROTK CPU Manager — Guide d'utilisation
+Version 1.4.2
+
+PRÉREQUIS
+Windows 10 ou 11, 64 bits, avec .NET Framework 4.8.
+Le dossier ROTK doit contenir H1Z1.exe et rotkc.dll.
+Aucune installation de l'application n'est nécessaire.
+
+UTILISATION
+1. Extrayez le ZIP si nécessaire, puis lancez l'exécutable fourni.
+2. Vérifiez le dossier ROTK. Le chemin proposé est C:\Games\ROTK.
+   Le bouton « Choisir… » permet de sélectionner une autre installation.
+3. Sélectionnez un profil CPU et consultez son explication.
+4. Cliquez sur « Appliquer et surveiller ». ROTK peut être lancé avant ou après.
+5. « Restaurer et arrêter » remet les CPU Sets présents avant la première
+   modification et désactive la surveillance.
+
+Réduire la fenêtre laisse la surveillance active dans la zone de notification.
+Un double-clic sur l'icône rouvre la fenêtre. Fermer l'application restaure les
+réglages précédents du jeu encore ouvert. Si la restauration échoue, la fermeture
+est annulée pour permettre une nouvelle tentative.
+
+La case « À chaque lancement du jeu » active ou désactive la surveillance.
+Ce choix est conservé à la prochaine ouverture. L'application doit rester ouverte ;
+elle ne démarre pas avec Windows et ne lance pas le jeu.
+
+LANGUES
+ROTK-CPU-Manager-FR.exe démarre en français.
+ROTK-CPU-Manager-EN.exe démarre en anglais.
+ROTK-CPU-Manager.exe mémorise la langue sélectionnée.
+Les boutons FR / EN permettent de changer de langue sans arrêter la surveillance.
+Les variantes partagent les préférences ; une seule instance peut être ouverte.
+
+FENÊTRE ET GUIDE INTÉGRÉ
+Les contrôles de fenêtre sont dans le bandeau supérieur.
+Le bandeau permet de déplacer la fenêtre ; les bords permettent de la redimensionner.
+Les barres de défilement acceptent la molette, le glissement et le clavier.
+Quand une barre a le focus : flèches, Page précédente/suivante, Début et Fin.
+« Comprendre les réglages » explique les profils et la méthode de comparaison.
+
+PROCESSEURS ET PROFILS
+- Intel hybrides : Core 12e, 13e et 14e générations avec P-cores et E-cores,
+  ainsi que Core Ultra 200S / 200S Plus. Les P-cores sont conseillés si Windows
+  identifie au moins quatre cœurs physiques de la classe la plus performante.
+- Ryzen 9 X3D à caches asymétriques : 7900X3D, 7950X3D, 9900X3D, 9950X3D.
+  Le groupe au grand cache est conseillé si toutes les tailles L3 sont connues
+  et que le plus grand cache dépasse deux fois le plus petit.
+- Ryzen 9 à groupes L3 comparables : 5900X, 5950X, 7900X, 7950X, 9900X,
+  9950X, 9950X3D2 Dual Edition. Gestion Windows est conseillée ; des profils
+  de groupes L3 sont proposés comme essais.
+- Ryzen X3D à groupe L3 unique : 5800X3D, 7800X3D, 9800X3D, 9850X3D.
+  Gestion Windows est conseillée ; un essai sans SMT est proposé.
+- Ryzen 5 3600 / 3600X : Gestion Windows est conseillée ; l'essai sans SMT
+  propose six threads au jeu au lieu de douze. Les groupes de moins de quatre
+  cœurs physiques ne sont pas proposés.
+- Intel sans classes P/E distinctes : Gestion Windows est conseillée ; un essai
+  sans Hyper-Threading est proposé si au moins quatre cœurs physiques disposent
+  de plusieurs threads. Sans Hyper-Threading, seule Gestion Windows est proposée.
+- Plusieurs groupes de processeurs Windows : Gestion Windows uniquement.
+
+Liste non exhaustive. Les profils dépendent de la topologie détectée, pas du nom
+du modèle. Un groupe L3 ne correspond pas toujours à un CCD.
+Les essais sans SMT/Hyper-Threading choisissent un thread logique par cœur physique
+pour le jeu ; le SMT reste actif pour le reste du PC.
+
+COMPARAISON EN JEU
+Comparez Gestion Windows et le profil conseillé dans une scène similaire,
+avec les mêmes options graphiques et applications en arrière-plan.
+Observez les à-coups et le temps par image, puis répétez la comparaison.
+Conservez le profil qui améliore régulièrement la fluidité sur votre machine.
+
+L'application ne mesure pas les FPS. La détection et les API Windows ont été
+vérifiées sur i9-13900KF ; les autres topologies sont couvertes par simulation.
+Aucun gain de performance dans ROTK n'a été mesuré par benchmark.
+
+PÉRIMÈTRE
+Seul H1Z1.exe directement dans le dossier ROTK sélectionné est ciblé.
+Les fichiers du jeu, services, pilotes, priorités, affinités strictes et réglages
+globaux Windows ne sont pas modifiés. L'application n'utilise pas le réseau
+et ne collecte aucune télémétrie.
+
+Les CPU Sets sont des préférences de répartition proposées à Windows.
+Une affinité existante ou des CPU Sets propres à un thread peuvent prendre le dessus.
+« Gestion Windows » retire la sélection de CPU Sets ; « Restaurer et arrêter »
+remet la sélection qui existait avant la première modification.
+
+DÉPANNAGE
+Si l'accès est refusé et que ROTK est exécuté comme administrateur, fermez
+l'application, puis relancez-la comme administrateur. Un processus protégé peut
+toujours refuser l'accès ; aucune protection n'est contournée.
+Les exécutables ne sont pas signés ; Windows peut afficher une alerte SmartScreen.
+Vérifiez la source du téléchargement et l'empreinte SHA-256 fournie.
+En cas de plantage ou d'arrêt forcé de l'application, relancez le jeu pour
+réinitialiser ses CPU Sets.
+
+PARTAGE ET PRÉFÉRENCES
+Le fichier EXE peut être partagé seul. Le ZIP inclut ce guide, la licence et
+l'empreinte de l'exécutable. La release inclut SHA256SUMS.txt pour tous les EXE et ZIP.
+Préférences locales : %LOCALAPPDATA%\ROTK CPU\settings.xml.
+Pour supprimer l'application, fermez-la et supprimez l'EXE. Le dossier de
+préférences peut également être supprimé.
+
+Licence MIT. Voir LICENSE et NOTICE.txt.

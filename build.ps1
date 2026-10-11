@@ -89,10 +89,10 @@ if ($Test -or $Render) {
     }
 }
 
-foreach ($file in @('LIRE-MOI.txt', 'READ-ME.txt', 'LICENSE', 'NOTICE.txt')) {
+foreach ($file in @('GUIDE-FR.txt', 'GUIDE-EN.txt', 'LICENSE', 'NOTICE.txt')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot $file) -Destination $buildFolder -Force
 }
-Write-PortablePackage -Name $appName -Instructions @('LIRE-MOI.txt', 'READ-ME.txt')
+Write-PortablePackage -Name $appName -Instructions @('GUIDE-FR.txt', 'GUIDE-EN.txt')
 
 foreach ($language in @('FR', 'EN')) {
     $name = "$appName-$language"
@@ -103,7 +103,7 @@ foreach ($language in @('FR', 'EN')) {
         & $variantTest --check-language $language.ToLowerInvariant()
         if ($LASTEXITCODE -ne 0) { throw "Language check failed: $language" }
     }
-    $instructions = if ($language -eq 'FR') { 'LIRE-MOI.txt' } else { 'READ-ME.txt' }
+    $instructions = "GUIDE-$language.txt"
     Write-PortablePackage -Name $name -Instructions @($instructions)
 }
 

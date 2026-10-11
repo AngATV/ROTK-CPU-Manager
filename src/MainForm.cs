@@ -199,7 +199,7 @@ namespace RotkCpu
             installLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120));
             installLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 22));
             installLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            var installTitle = MakeLabel(Locale.T("01  /  VOTRE INSTALLATION"), 9, muted, true);
+            var installTitle = MakeLabel(Locale.T("01  /  INSTALLATION"), 9, muted, true);
             installLayout.Controls.Add(installTitle, 0, 0);
             installLayout.SetColumnSpan(installTitle, 2);
             folderBox.Dock = DockStyle.Fill;
@@ -227,7 +227,7 @@ namespace RotkCpu
             cpuLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 22));
             cpuLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26));
             cpuLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            cpuLayout.Controls.Add(MakeLabel(Locale.T("02  /  MATÉRIEL DÉTECTÉ"), 9, muted, true), 0, 0);
+            cpuLayout.Controls.Add(MakeLabel(Locale.T("02  /  PROCESSEUR"), 9, muted, true), 0, 0);
             cpuLabel.Dock = DockStyle.Fill;
             cpuLabel.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             cpuLabel.AutoEllipsis = true;
@@ -247,7 +247,7 @@ namespace RotkCpu
             foreach (float height in new float[] { 24, 36, 66 })
                 profileLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
             profileLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            profileLayout.Controls.Add(MakeLabel(Locale.T("03  /  CHOISISSEZ VOTRE PROFIL"), 9, accent, true), 0, 0);
+            profileLayout.Controls.Add(MakeLabel(Locale.T("03  /  PROFIL CPU"), 9, accent, true), 0, 0);
             profileBox.Dock = DockStyle.Fill;
             profileBox.DropDownStyle = ComboBoxStyle.DropDownList;
             profileBox.DrawMode = DrawMode.OwnerDrawFixed;

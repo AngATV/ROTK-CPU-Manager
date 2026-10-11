@@ -136,7 +136,7 @@ namespace RotkCpu
             {
                 ToggleMax(owner);
             }, false);
-            AddButton("×", "Fermer et restaurer", delegate
+            AddButton("×", owner is MainForm ? "Fermer et restaurer" : "Fermer la fenêtre", delegate
             {
                 owner.Close();
             }, true);

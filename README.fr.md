@@ -11,16 +11,17 @@ processeur et restaure les réglages précédents à l'arrêt de la surveillance
 ## Télécharger
 
 [Dernière version](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest)
-— Windows x64, version 1.4.1.
+— Windows x64, version 1.4.2.
 
-La v1.4.1 corrige la molette dans « Comprendre les réglages », y compris
-les petits mouvements des molettes de précision.
+La v1.4.2 harmonise les textes FR/EN et les guides d'utilisation.
+Elle inclut le correctif de défilement du guide introduit en v1.4.1.
 
 - [Exécutable bilingue](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager.exe)
 - [Archive portable française](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager-FR-portable.zip)
 - [Archive portable anglaise](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager-EN-portable.zip)
 
-Chaque ZIP contient un exécutable, la notice, la licence et son empreinte.
+Chaque ZIP contient un exécutable, le guide d'utilisation (`GUIDE-FR.txt` ou
+`GUIDE-EN.txt`), la licence et son empreinte. L'archive bilingue inclut les deux guides.
 La release inclut aussi `SHA256SUMS.txt` pour tous les exécutables et archives.
 
 ## Fonctionnalités
@@ -76,7 +77,7 @@ et [9950X3D2](https://newsroom.amd.com/news/amd-launches-ryzen-9-9950x3d2-dual-e
 
 ## Utilisation
 
-1. Extrayez l'archive portable et lancez `ROTK-CPU-Manager.exe`.
+1. Extrayez l'archive si nécessaire, puis lancez l'exécutable.
 2. Sélectionnez le dossier ROTK s'il diffère de `C:\Games\ROTK`.
    Il doit contenir `H1Z1.exe` et `rotkc.dll`.
 3. Choisissez un profil puis **Appliquer et surveiller**.

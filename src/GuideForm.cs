@@ -20,7 +20,7 @@ namespace RotkCpu
             Padding = new Padding(0);
             var close = new Button
             {
-                Text = Locale.T("J'AI COMPRIS"),
+                Text = Locale.T("FERMER"),
                 Dock = DockStyle.Bottom,
                 Height = 42,
                 FlatStyle = FlatStyle.Flat,

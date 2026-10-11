@@ -11,16 +11,17 @@ restores the game's previous settings when monitoring stops.
 ## Download
 
 [Latest release](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest)
-— Windows x64, version 1.4.1.
+— Windows x64, version 1.4.2.
 
-Version 1.4.1 fixes scrolling in "Understand the settings", including small
-movements from precision mouse wheels.
+Version 1.4.2 standardizes FR/EN wording and user guides.
+It includes the guide scrolling fix introduced in v1.4.1.
 
 - [Bilingual executable](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager.exe)
 - [French portable ZIP](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager-FR-portable.zip)
 - [English portable ZIP](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager-EN-portable.zip)
 
-Each ZIP contains one executable, instructions, a license and its checksum.
+Each ZIP contains one executable, a user guide (`GUIDE-FR.txt` or `GUIDE-EN.txt`),
+a license and its checksum. The bilingual archive includes both guides.
 The release also includes `SHA256SUMS.txt` for all executables and archives.
 
 ## Features
@@ -76,7 +77,7 @@ and [9950X3D2](https://newsroom.amd.com/news/amd-launches-ryzen-9-9950x3d2-dual-
 
 ## Usage
 
-1. Extract the portable archive and run `ROTK-CPU-Manager.exe`.
+1. Extract the archive if needed, then run the executable.
 2. Select the ROTK folder if it differs from `C:\Games\ROTK`.
    It must contain `H1Z1.exe` and `rotkc.dll`.
 3. Choose a profile, then select **Apply and monitor**.
