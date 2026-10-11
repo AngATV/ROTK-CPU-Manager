@@ -6,7 +6,7 @@ namespace RotkCpu
 {
     internal sealed class TacticalScrollBar : Control
     {
-        private int maximum, viewport = 1, value, dragOffset;
+        private int maximum, viewport = 1, value, dragOffset, wheelRemainder;
         private bool dragging, hover;
         internal event EventHandler ValueChanged;
         internal int Maximum
@@ -171,8 +171,12 @@ namespace RotkCpu
         internal void Wheel(int delta)
         {
             int lines = SystemInformation.MouseWheelScrollLines;
-            if (lines != 0)
-                Value -= delta / 120 * (lines < 0 ? viewport : lines * 18);
+            if (!Enabled || lines == 0)
+                return;
+            wheelRemainder += delta;
+            int ticks = wheelRemainder / 120;
+            wheelRemainder %= 120;
+            Value -= ticks * (lines < 0 ? viewport : lines * 18);
         }
         protected override void OnMouseWheel(MouseEventArgs e)
         {
@@ -226,10 +230,18 @@ namespace RotkCpu
         }
         public bool PreFilterMessage(ref Message message)
         {
-            if (message.Msg != 0x20A || !Visible || !IsHandleCreated || !RectangleToScreen(ClientRectangle).Contains(Cursor.Position))
+            if (message.Msg != 0x20A || !Visible || !Enabled || !IsHandleCreated)
+                return false;
+            // Global filters also see messages for modal windows; leave those to their own scroll views.
+            Control recipient = Control.FromChildHandle(message.HWnd);
+            if (recipient == null || recipient.FindForm() != FindForm())
+                return false;
+            long coordinates = message.LParam.ToInt64();
+            Point pointer = new Point((short)(coordinates & 65535), (short)((coordinates >> 16) & 65535));
+            if (!RectangleToScreen(ClientRectangle).Contains(pointer))
                 return false;
             Control target = viewport;
-            for (Control child = target.GetChildAtPoint(target.PointToClient(Cursor.Position)); child != null; child = target.GetChildAtPoint(target.PointToClient(Cursor.Position)))
+            for (Control child = target.GetChildAtPoint(target.PointToClient(pointer)); child != null; child = target.GetChildAtPoint(target.PointToClient(pointer)))
             {
                 target = child;
                 if (target is ComboBox)

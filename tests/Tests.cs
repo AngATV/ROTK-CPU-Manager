@@ -45,6 +45,13 @@ namespace RotkCpu
                 Check(bar.Thumb.Bottom <= 196, "Thumb stays inside its track");
                 bar.Value = -99;
                 Check(bar.Value == 0, "Scroll clamps at the top");
+                bar.Wheel(-30);
+                bar.Wheel(-30);
+                bar.Wheel(-30);
+                Check(bar.Value == 0, "Precision-wheel deltas accumulate before a complete notch");
+                bar.Wheel(-30);
+                Check(bar.Value > 0, "Precision-wheel deltas produce a scroll after a complete notch");
+                bar.Value = 0;
                 bar.Wheel(-120);
                 Check(bar.Value > 0, "Mouse wheel moves custom scrollbar");
                 bar.SetRange(100, 200);
@@ -95,6 +102,70 @@ namespace RotkCpu
                 guide.Close();
             }
             Locale.Language = "fr";
+        }
+
+        private static void GuideScrollingTests()
+        {
+            try
+            {
+                foreach (string language in new string[] { "fr", "en" })
+                {
+                    Locale.Language = language;
+                    using (var owner = new MainForm(true))
+                    using (var guide = new GuideForm())
+                    {
+                        owner.StartPosition = FormStartPosition.Manual;
+                        owner.Location = new Point(40, 40);
+                        owner.Show();
+                        guide.StartPosition = FormStartPosition.Manual;
+                        guide.Location = new Point(140, 200);
+                        Exception failure = null;
+                        guide.Shown += delegate
+                        {
+                            guide.BeginInvoke((MethodInvoker)delegate
+                            {
+                                try
+                                {
+                                    var scroller = Descendants(guide).OfType<TacticalScrollView>().Single();
+                                    var flow = Descendants(scroller).OfType<FlowLayoutPanel>().Single();
+                                    var background = Descendants(owner).OfType<TacticalScrollView>().ToArray();
+                                    Point pointer = scroller.PointToScreen(new Point(25, 40));
+                                    int position = (pointer.Y << 16) | (pointer.X & 65535);
+                                    var wheel = Message.Create(guide.Handle, 0x20A, new IntPtr(-120 << 16), new IntPtr(position));
+                                    Check(Application.FilterMessage(ref wheel) && scroller.Bar.Value > 0,
+                                        language + " modal guide receives wheel while main window remains open");
+                                    Check(background.All(x => x.Bar.Value == 0), language + " modal guide never scrolls the background window");
+                                    Check(flow.Top == -scroller.Bar.Value, language + " wheel moves guide text along with its thumb");
+                                    scroller.ScrollToStart();
+                                    var bar = scroller.Bar;
+                                    Point thumb = new Point(bar.Thumb.Left + 2, bar.Thumb.Top + bar.Thumb.Height / 2);
+                                    typeof(TacticalScrollBar).GetMethod("OnMouseDown", BindingFlags.Instance | BindingFlags.NonPublic)
+                                        .Invoke(bar, new object[] { new MouseEventArgs(MouseButtons.Left, 1, thumb.X, thumb.Y, 0) });
+                                    typeof(TacticalScrollBar).GetMethod("OnMouseMove", BindingFlags.Instance | BindingFlags.NonPublic)
+                                        .Invoke(bar, new object[] { new MouseEventArgs(MouseButtons.Left, 0, thumb.X, bar.Height + thumb.Y, 0) });
+                                    typeof(TacticalScrollBar).GetMethod("OnMouseUp", BindingFlags.Instance | BindingFlags.NonPublic)
+                                        .Invoke(bar, new object[] { new MouseEventArgs(MouseButtons.Left, 1, thumb.X, bar.Height, 0) });
+                                    Application.DoEvents();
+                                    Check(bar.Value == bar.Maximum && flow.Top == -bar.Maximum, language + " dragging thumb reaches the end without a layout jump");
+                                    guide.ClientSize = new Size(620, 500);
+                                    Application.DoEvents();
+                                    scroller.ScrollToEnd();
+                                    Application.DoEvents();
+                                    Check(flow.Top + flow.Controls[flow.Controls.Count - 1].Bottom <= scroller.ClientSize.Height,
+                                        language + " final paragraph is visible after resizing and scrolling to the end");
+                                }
+                                catch (Exception ex) { failure = ex; }
+                                finally { guide.Close(); }
+                            });
+                        };
+                        guide.ShowDialog(owner);
+                        if (failure != null)
+                            throw failure;
+                        owner.Close();
+                    }
+                }
+            }
+            finally { Locale.Language = "fr"; }
         }
         private static void Check(bool value, string name)
         {
@@ -464,6 +535,7 @@ namespace RotkCpu
                 NativeTests(cpu);
                 WatcherTests(cpu);
                 LanguageAndUiTests();
+                GuideScrollingTests();
                 Console.WriteLine("PASS: " + checks + " checks");
                 Console.WriteLine(cpu.Name + ": " + cpu.CoreCount + " cores / " + cpu.Sets.Count + " logical CPUs");
                 foreach (var profile in Profiles.Build(cpu))

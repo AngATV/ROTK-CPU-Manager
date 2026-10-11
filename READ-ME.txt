@@ -1,4 +1,4 @@
-ROTK CPU Manager — portable version 1.4
+ROTK CPU Manager — portable version 1.4.1
 Dedicated CPU assistant for the ROTK / Z1BR client.
 
 GETTING STARTED

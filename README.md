@@ -11,7 +11,10 @@ restores the game's previous settings when monitoring stops.
 ## Download
 
 [Latest release](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest)
-— Windows x64, version 1.4.0.
+— Windows x64, version 1.4.1.
+
+Version 1.4.1 fixes scrolling in "Understand the settings", including small
+movements from precision mouse wheels.
 
 - [Bilingual executable](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager.exe)
 - [French portable ZIP](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager-FR-portable.zip)

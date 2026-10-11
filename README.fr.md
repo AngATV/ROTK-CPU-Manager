@@ -11,7 +11,10 @@ processeur et restaure les réglages précédents à l'arrêt de la surveillance
 ## Télécharger
 
 [Dernière version](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest)
-— Windows x64, version 1.4.0.
+— Windows x64, version 1.4.1.
+
+La v1.4.1 corrige la molette dans « Comprendre les réglages », y compris
+les petits mouvements des molettes de précision.
 
 - [Exécutable bilingue](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager.exe)
 - [Archive portable française](https://github.com/AngATV/ROTK-CPU-Manager/releases/latest/download/ROTK-CPU-Manager-FR-portable.zip)
